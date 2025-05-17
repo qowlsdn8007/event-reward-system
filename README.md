@@ -1,2 +1,5 @@
-# event-reward-system
-A microservices-based backend system for managing user events and rewards
+# 이벤트 / 보상 관리 시스템 (Event-Reward Management System)
+
+본 프로젝트는 [메이플스토리 PC] 웹 백엔드 엔지니어 과제를 위해 개발된 **이벤트 및 보상 관리 플랫폼**입니다.
+
+NestJS 기반 MSA 아키텍처로 설계되었으며, 인증 및 역할 기반 권한 제어, 이벤트 조건 검증, 보상 자동 처리 기능을 포함합니다.
