@@ -1,0 +1,32 @@
+services:
+  gateway:
+    build:
+      context: .
+      dockerfile: ./apps/gateway/Dockerfile
+    container_name: gateway
+    ports:
+      - '3000:3000' # 외부:컨테이너 내부 포트
+    environment:
+      - NODE_ENV=local
+      - AUTH_SERVICE_HOST=auth
+      - AUTH_SERVICE_PORT=3001
+    # depends_on:
+    #   - auth
+    # networks:
+    #   - app-network
+
+  # auth:
+  #   build:
+  #     context: .
+  #     dockerfile: ./apps/auth/Dockerfile
+  #   container_name: auth
+  #   ports:
+  #     - '3001:3001'
+  #   environment:
+  #     - NODE_ENV=local
+  #   networks:
+  #     - app-network
+
+networks:
+  app-network:
+    driver: bridge
