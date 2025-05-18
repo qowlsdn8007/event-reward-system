@@ -36,10 +36,5 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  },
-  "dependencies": {
-    "@nestjs/jwt": "^10.0.0",
-    "bcrypt": "^6.0.0",
-    "@event-reward-system/common": "workspace:../../libs/common"
   }
 }
