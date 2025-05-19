@@ -39,8 +39,6 @@ export class AuthService implements IAuthService {
   }
 
   async register(req: RegisterUserRequest): Promise<User> {
-    console.log('req', req)
-    console.log('repo', this.userRepo)
     const user = await this.userRepo.findByUsername(req.username)
     if (user) throw new Error('User already exists')
     const hashedPassword = await bcrypt.hash(req.password, 10)
@@ -52,9 +50,8 @@ export class AuthService implements IAuthService {
       },
       this.generateIdFactory,
     )
-    console.log('newUser', newUser)
+
     const savedUser = await this.userRepo.saveUser(newUser)
-    console.log('savedUser', savedUser)
     return savedUser
   }
 
@@ -64,7 +61,6 @@ export class AuthService implements IAuthService {
     if (!user) throw new Error('User not found')
 
     user.updateRole(req.role as Role)
-    console.log('updated user', user)
     const updatedUser = await this.userRepo.saveUser(user)
     return updatedUser
   }

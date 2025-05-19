@@ -36,9 +36,7 @@ export class User extends BaseMongodbEntity {
     generateIdFactory: GenerateIdFactory,
   ): Promise<User> {
     const id = await generateIdFactory.execute()
-    console.log('id', id)
     const now = new Date()
-    console.log('props', props)
     const user = new User({})
     user.id = id
     user.username = props.username
@@ -52,7 +50,6 @@ export class User extends BaseMongodbEntity {
   }
 
   updateRole(role: Role): void {
-    console.log(this)
     this.role = role
   }
 }

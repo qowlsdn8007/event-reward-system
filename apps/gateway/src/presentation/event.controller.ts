@@ -58,7 +58,6 @@ export class EventController {
   @UseGuards(JwtAuthGuard)
   @Get('claim/me')
   getMyClaims(@Req() req) {
-    console.log('req', req.user)
     const userId = req.user.userId
     return this.eventService.getClaimsByUserId(userId)
   }
