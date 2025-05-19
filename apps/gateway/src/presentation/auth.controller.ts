@@ -1,5 +1,5 @@
 import { Body, Controller, Post, Put, UseGuards } from '@nestjs/common'
-import { AuthService } from '../application/auth/auth.service'
+import { AuthService } from '../application/auth.service'
 import {
   EditRoleRequestBody,
   LoginRequestBody,

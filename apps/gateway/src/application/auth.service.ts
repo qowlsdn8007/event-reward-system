@@ -5,7 +5,7 @@ import {
   EditRoleRequestBody,
   LoginRequestBody,
   RegisterUserRequestBody,
-} from '../../dto/auth.request.body'
+} from '../dto/auth.request.body'
 
 @Injectable()
 export class AuthService {
