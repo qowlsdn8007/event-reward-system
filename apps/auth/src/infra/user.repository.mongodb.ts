@@ -1,8 +1,9 @@
 // infrastructure/repositories/user.repository.mongo.ts
 import { Injectable } from '@nestjs/common'
 import { DataSource } from 'typeorm'
-import { User } from '../domain/user'
+import { Role, User } from '../domain/user'
 import { BaseRepository } from './base.mongodb.repository'
+
 @Injectable()
 export class MongoUserRepository extends BaseRepository<User> {
   constructor(dataSource: DataSource) {
@@ -17,7 +18,7 @@ export class MongoUserRepository extends BaseRepository<User> {
     return this.findOne({ where: { id } })
   }
 
-  async save(user: User): Promise<User> {
+  async saveUser(user: User): Promise<User> {
     return this.save(user)
   }
 }

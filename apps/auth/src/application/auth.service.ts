@@ -53,7 +53,7 @@ export class AuthService implements IAuthService {
       this.generateIdFactory,
     )
     console.log('newUser', newUser)
-    const savedUser = await this.userRepo.save(newUser)
+    const savedUser = await this.userRepo.saveUser(newUser)
     console.log('savedUser', savedUser)
     return savedUser
   }
@@ -65,7 +65,7 @@ export class AuthService implements IAuthService {
 
     user.updateRole(req.role as Role)
     console.log('updated user', user)
-    const updatedUser = await this.userRepo.save(user)
+    const updatedUser = await this.userRepo.saveUser(user)
     return updatedUser
   }
 }
