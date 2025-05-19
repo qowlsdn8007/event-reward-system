@@ -11,10 +11,7 @@ export class EventService implements IEventService {
     private readonly generateIdFactory: GenerateIdFactory,
   ) {}
 
-  async createEvent(
-    dto: CreateEventRequest,
-    createdBy: string,
-  ): Promise<Event> {
+  async createEvent(dto: CreateEventRequest): Promise<Event> {
     const event = await Event.create(
       {
         name: dto.name,
@@ -22,7 +19,7 @@ export class EventService implements IEventService {
         condition: dto.condition,
         startDate: new Date(dto.startDate),
         endDate: new Date(dto.endDate),
-        createdBy,
+        createdBy: dto.createdBy,
         status: dto.status,
       },
       this.generateIdFactory,
