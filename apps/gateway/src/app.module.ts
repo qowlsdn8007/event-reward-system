@@ -1,12 +1,10 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
-import { AppController } from './app.controller'
 import { ClientsModule, Transport } from '@nestjs/microservices'
-import { AppService } from './app.service'
 import { AuthController } from './presentation/auth.controller'
 import { AuthService } from './application/auth/auth.service'
 import { PassportModule } from '@nestjs/passport'
-import { JwtStrategy } from './jwt.strategy'
+import { JwtStrategy } from './infra/jwt.strategy'
 import { RolesGuard } from './infra/roles.guard'
 
 @Module({
@@ -43,7 +41,7 @@ import { RolesGuard } from './infra/roles.guard'
     ]),
     PassportModule,
   ],
-  controllers: [AppController, AuthController],
-  providers: [AppService, AuthService, JwtStrategy, RolesGuard],
+  controllers: [AuthController],
+  providers: [AuthService, JwtStrategy, RolesGuard],
 })
 export class AppModule {}

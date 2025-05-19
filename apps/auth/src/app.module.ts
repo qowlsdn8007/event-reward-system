@@ -1,14 +1,11 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
-import { AppController } from './app.controller'
-import { AppService } from './app.service'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { GenerateIdFactory } from './generate-id.factory'
 import { JwtModule } from '@nestjs/jwt'
 import { AuthService } from './application/auth.service'
 import { User } from './domain/user'
 import { AuthController } from './presentation/auth.controller'
-import { IUserRepository } from './domain/user.repository.interface'
 import { MongoUserRepository } from './infra/user.repository.mongodb'
 @Module({
   imports: [
@@ -39,9 +36,8 @@ import { MongoUserRepository } from './infra/user.repository.mongodb'
       inject: [ConfigService],
     }),
   ],
-  controllers: [AppController, AuthController],
+  controllers: [AuthController],
   providers: [
-    AppService,
     AuthService,
     MongoUserRepository,
     {
