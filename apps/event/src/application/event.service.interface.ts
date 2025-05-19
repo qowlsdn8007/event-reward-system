@@ -1,9 +1,14 @@
 import { Event } from '../domain/event'
 
+interface EventCondition {
+  type: 'LOGIN_CONSECUTIVE_DAYS' | string
+  value: number
+}
+
 export interface CreateEventRequest {
   name: string
   description: string
-  condition: string
+  condition: EventCondition
   startDate: string // ISO 형식 문자열
   endDate: string
   status: 'ACTIVE' | 'INACTIVE'

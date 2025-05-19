@@ -8,6 +8,11 @@ type CreateProps = Omit<
   'id' | 'createdAt' | 'updatedAt' | 'deletedAt'
 >
 
+export interface EventCondition {
+  type: 'LOGIN_CONSECUTIVE_DAYS' | string
+  value: number
+}
+
 @Entity()
 export class Event extends BaseMongodbEntity {
   @Column()
@@ -19,8 +24,8 @@ export class Event extends BaseMongodbEntity {
   @Column()
   description: string
 
-  @Column()
-  condition: string
+  @Column({ type: 'simple-json' })
+  condition: EventCondition
 
   @Column()
   startDate: Date

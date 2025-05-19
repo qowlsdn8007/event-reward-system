@@ -1,4 +1,21 @@
-import { IsString, IsNotEmpty, IsOptional } from 'class-validator'
+import { Type } from 'class-transformer'
+import {
+  IsString,
+  IsNotEmpty,
+  IsOptional,
+  ValidateNested,
+  IsNumber,
+} from 'class-validator'
+
+class EventCondition {
+  @IsString()
+  @IsNotEmpty()
+  type: 'LOGIN_CONSECUTIVE_DAYS' | string
+
+  @IsNumber()
+  @IsNotEmpty()
+  value: number
+}
 
 export class CreateEventRequest {
   @IsString()
@@ -9,9 +26,9 @@ export class CreateEventRequest {
   @IsNotEmpty()
   description: string
 
-  @IsString()
-  @IsNotEmpty()
-  condition: string
+  @ValidateNested({ each: true })
+  @Type(() => EventCondition)
+  condition: EventCondition
 
   @IsString()
   @IsNotEmpty()
@@ -41,7 +58,7 @@ export class CreateRewardRequest {
 
   @IsString()
   @IsNotEmpty()
-  value: string // ex) 쿠폰코드, 포인트 값 등
+  value: string // ex) coupon code, point amount etc....
 
   @IsString()
   @IsOptional()

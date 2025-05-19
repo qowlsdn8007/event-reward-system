@@ -8,6 +8,14 @@ import { EventService } from './application/event.service'
 import { MongoEventRepository } from './infra/event.repository.mongodb'
 import { GenerateIdFactory } from './generate-id.factory'
 import { Event } from './domain/event'
+import { RewardService } from './application/reward.service'
+import { ClaimService } from './application/claim.service'
+import { MongoRewardRepository } from './infra/reward.repository.mongodb'
+import { MongoClaimRepository } from './infra/claim.repository.mongodb'
+import { ConditionCheckerService } from './application/condition-checker.service'
+import { MongoUserBehaviorLogRepository } from './infra/user-behavior-log.repository.mongodb'
+import { RewardController } from './presentation/reward.controller'
+import { ClaimController } from './presentation/claim.controller'
 
 @Module({
   imports: [
@@ -28,11 +36,22 @@ import { Event } from './domain/event'
     }),
     TypeOrmModule.forFeature([Event]),
   ],
-  controllers: [AppController, EventController],
+  controllers: [
+    AppController,
+    EventController,
+    RewardController,
+    ClaimController,
+  ],
   providers: [
     AppService,
     EventService,
+    RewardService,
+    ClaimService,
+    ConditionCheckerService,
     MongoEventRepository,
+    MongoRewardRepository,
+    MongoClaimRepository,
+    MongoUserBehaviorLogRepository,
     {
       provide: 'IEventRepository',
       useClass: MongoEventRepository,
@@ -40,6 +59,18 @@ import { Event } from './domain/event'
     {
       provide: GenerateIdFactory,
       useValue: new GenerateIdFactory(),
+    },
+    {
+      provide: 'IRewardRepository',
+      useClass: MongoRewardRepository,
+    },
+    {
+      provide: 'IClaimRepository',
+      useClass: MongoClaimRepository,
+    },
+    {
+      provide: 'IUserBehaviorLogRepository',
+      useClass: MongoUserBehaviorLogRepository,
     },
   ],
 })
