@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm'
 
-import type { Props } from './props'
+import type { Props } from '../props'
 
 export abstract class BaseMongodbEntity {
   @ObjectIdColumn()
