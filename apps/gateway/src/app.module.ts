@@ -6,6 +6,8 @@ import { AuthService } from './application/auth/auth.service'
 import { PassportModule } from '@nestjs/passport'
 import { JwtStrategy } from './infra/jwt.strategy'
 import { RolesGuard } from './infra/roles.guard'
+import { EventController } from './presentation/event.controller'
+import { EventService } from './application/event.service'
 
 @Module({
   imports: [
@@ -41,7 +43,7 @@ import { RolesGuard } from './infra/roles.guard'
     ]),
     PassportModule,
   ],
-  controllers: [AuthController],
-  providers: [AuthService, JwtStrategy, RolesGuard],
+  controllers: [AuthController, EventController],
+  providers: [AuthService, EventService, JwtStrategy, RolesGuard],
 })
 export class AppModule {}
