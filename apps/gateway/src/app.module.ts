@@ -5,6 +5,9 @@ import { ClientsModule, Transport } from '@nestjs/microservices'
 import { AppService } from './app.service'
 import { AuthController } from './presentation/auth.controller'
 import { AuthService } from './application/auth/auth.service'
+import { PassportModule } from '@nestjs/passport'
+import { JwtStrategy } from './jwt.strategy'
+import { RolesGuard } from './infra/roles.guard'
 
 @Module({
   imports: [
@@ -38,8 +41,9 @@ import { AuthService } from './application/auth/auth.service'
         }),
       },
     ]),
+    PassportModule,
   ],
   controllers: [AppController, AuthController],
-  providers: [AppService, AuthService],
+  providers: [AppService, AuthService, JwtStrategy, RolesGuard],
 })
 export class AppModule {}
