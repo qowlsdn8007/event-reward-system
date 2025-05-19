@@ -11,7 +11,8 @@ import {
 export class EventService {
   constructor(@Inject('EVENT_SERVICE') private readonly client: ClientProxy) {}
 
-  createEvent(payload: CreateEventRequest) {
+  createEvent(payload: CreateEventRequest, userName: string) {
+    payload['createdBy'] = userName
     return firstValueFrom(this.client.send({ cmd: 'event.create' }, payload))
   }
 

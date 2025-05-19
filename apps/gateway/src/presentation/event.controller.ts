@@ -24,8 +24,9 @@ export class EventController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('OPERATOR', 'ADMIN')
   @Post()
-  async create(@Body() body: CreateEventRequest) {
-    return await this.eventService.createEvent(body)
+  async create(@Req() req, @Body() body: CreateEventRequest) {
+    const userName = req.user.username
+    return await this.eventService.createEvent(body, userName)
   }
 
   @UseGuards(JwtAuthGuard)
@@ -57,6 +58,7 @@ export class EventController {
   @UseGuards(JwtAuthGuard)
   @Get('claim/me')
   getMyClaims(@Req() req) {
+    console.log('req', req.user)
     const userId = req.user.userId
     return this.eventService.getClaimsByUserId(userId)
   }
