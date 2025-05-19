@@ -11,46 +11,39 @@ import {
 export class EventService {
   constructor(@Inject('EVENT_SERVICE') private readonly client: ClientProxy) {}
 
-  createEvent(payload: CreateEventRequest, userName: string) {
-    payload['createdBy'] = userName
-    return firstValueFrom(this.client.send({ cmd: 'event.create' }, payload))
+  async createEvent(payload: CreateEventRequest) {
+    return firstValueFrom(this.client.send('event.create', payload))
   }
 
-  getEvents() {
-    return firstValueFrom(this.client.send({ cmd: 'event.get-all' }, {}))
+  async getEvents() {
+    return firstValueFrom(this.client.send('event.get-all', {}))
   }
 
-  getEventById(eventId: string) {
-    return firstValueFrom(
-      this.client.send({ cmd: 'event.get-one' }, { eventId }),
-    )
+  async getEventById(eventId: string) {
+    return firstValueFrom(this.client.send('event.get-one', { eventId }))
   }
 
-  createReward(payload: CreateRewardRequest) {
-    return firstValueFrom(this.client.send({ cmd: 'reward.create' }, payload))
+  async createReward(payload: CreateRewardRequest) {
+    return firstValueFrom(this.client.send('reward.create', payload))
   }
 
-  getRewards() {
-    return firstValueFrom(this.client.send({ cmd: 'reward.get-all' }, {}))
+  async getRewards() {
+    return firstValueFrom(this.client.send('reward.get-all', {}))
   }
 
-  getRewardsByEventId(eventId: string) {
-    return firstValueFrom(
-      this.client.send({ cmd: 'reward.get-by-event' }, { eventId }),
-    )
+  async getRewardsByEventId(eventId: string) {
+    return firstValueFrom(this.client.send('reward.get-by-event', { eventId }))
   }
 
-  claimReward(payload: ClaimEventRewardRequest) {
-    return firstValueFrom(this.client.send({ cmd: 'claim.request' }, payload))
+  async claimReward(payload: ClaimEventRewardRequest) {
+    return firstValueFrom(this.client.send('claim.request', payload))
   }
 
-  getClaimHistory() {
-    return firstValueFrom(this.client.send({ cmd: 'claim.get-all' }, {}))
+  async getClaimHistory() {
+    return firstValueFrom(this.client.send('claim.get-all', {}))
   }
 
-  getClaimsByUserId(userId: string) {
-    return firstValueFrom(
-      this.client.send({ cmd: 'claim.get-by-user' }, { userId }),
-    )
+  async getClaimsByUserId(userId: string) {
+    return firstValueFrom(this.client.send('claim.get-by-user', { userId }))
   }
 }
