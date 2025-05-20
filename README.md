@@ -23,6 +23,16 @@ $root
 docker-compose up --build -d
 ```
 
+초기에 mongo-init 파일 아래의 스크립트가 실행되면서
+
+```
+username: admin
+password: admin
+role: ADMIN
+```
+
+인 계정이 생성됩니다. 이를 사용하세요.
+
 로컬 docker 실행 시 현재 env에 셋팅되어있는 호스트, 포트는 아래와 같습니다.
 
 - gateway server: localhost:3000

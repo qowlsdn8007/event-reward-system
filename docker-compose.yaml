@@ -6,6 +6,7 @@ services:
       - '27017:27017'
     volumes:
       - auth_db_data:/data/db
+      - ./mongo-init:/docker-entrypoint-initdb.d
 
   event-db:
     image: mongo:6
