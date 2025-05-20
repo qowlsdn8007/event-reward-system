@@ -42,7 +42,6 @@ export class EventController {
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('USER')
   @Post('claim')
   async claimReward(@Body() body: ClaimEventRewardRequest) {
     return await this.eventService.claimReward(body)
@@ -82,7 +81,7 @@ export class EventController {
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('USER', 'OPERATOR', 'AUDITOR', 'ADMIN')
+  @Roles('OPERATOR', 'AUDITOR', 'ADMIN')
   @Get('claim')
   async getClaims() {
     return await this.eventService.getClaimHistory()
